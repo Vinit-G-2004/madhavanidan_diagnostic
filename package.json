@@ -1,0 +1,21 @@
+{
+  "name": "madhavanidan-diagnostic-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/local-server.mjs",
+    "local": "node scripts/local-server.mjs",
+    "hash-password": "node scripts/hash-password.mjs",
+    "make-secret": "node scripts/make-secret.mjs"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.41.0",
+    "@vercel/blob": "^2.9.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "overrides": {
+    "zod": "^4.6.6"
+  }
+}

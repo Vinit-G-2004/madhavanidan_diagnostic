@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · Madhavanidan Diagnostic</title>
+<link rel="icon" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--blue:#0b3cae;--red:#df0005;--teal:#17a89a;--green:#035d2f;
+  --bg:#ffffff;--soft:#f5f7fb;--ink:#0c1630;--mute:#5a6580;--line:#e3e7f0;--pri:#0b3cae}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px;background:#fff}
+body{margin:0;background:#fff;color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+[hidden]{display:none!important}
+#stage{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;transition:opacity .5s}
+header,main,footer,.view{position:relative;z-index:1}
+.wrap{max-width:1200px;margin:0 auto}
+.band{padding:clamp(64px,9vw,128px) max(5vw,20px)}
+h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(38px,5.4vw,60px);line-height:1.05;margin:0 0 20px;font-weight:700}
+h2{font-size:clamp(30px,3.6vw,44px);line-height:1.08;margin:0 0 16px;font-weight:700}
+h3{font-size:18px;line-height:1.3;margin:0 0 4px;font-weight:600}
+.lead{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.kick{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--red);margin-bottom:18px}
+.kick::before{content:"";width:28px;height:2px;background:var(--red)}
+nav{position:fixed;inset:0 0 auto;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.s{border-color:var(--line)}
+.nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:12px max(5vw,20px);flex-wrap:wrap}
+.logo{display:block;flex:none}.logo img{height:52px;width:auto;display:block}
+.links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+.links a{text-decoration:none;padding:10px 12px;font-size:14px;font-weight:500;color:var(--mute);border-radius:8px}
+.links a:hover,.links a.on{color:var(--ink)}.links a.on{box-shadow:inset 0 -2px 0 var(--red);border-radius:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:8px;border:1px solid var(--pri);font:600 15px/1 Inter,sans-serif;cursor:pointer;text-decoration:none;background:var(--pri);color:#fff;transition:background .2s,color .2s}
+.btn:hover{background:#082c82}
+.btn.ghost{background:#fff;color:var(--pri)}.btn.ghost:hover{background:#eef2fb}
+.btn.sm{min-height:40px;padding:0 14px;font-size:14px}
+.btn.danger{background:#fff;color:var(--red);border-color:#f3c2c3}.btn.danger:hover{background:#fdf0f0}
+.btn:disabled{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:120px}
+.hero .copy{max-width:540px}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;align-items:center}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:64px;border-top:1px solid var(--line);max-width:620px}
+.facts div{padding:18px 18px 0 0}
+.facts b{display:block;font:700 30px/1.1 "Inter Tight",sans-serif;color:var(--pri)}
+.facts span{font-size:14px;color:var(--mute)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,6vw,96px);align-items:center;min-height:86svh}
+.split.r>.copy{grid-column:2}
+.list{list-style:none;padding:0;margin:28px 0 0;border-top:1px solid var(--line)}
+.list li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}
+.list li svg{margin-top:3px;color:var(--teal)}
+.list li p{margin:0;color:var(--mute);font-size:15px}
+.cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:44px;border-top:1px solid var(--line)}
+.col{padding:24px 24px 8px 0}.col+.col{padding-left:24px;border-left:1px solid var(--line)}
+.col h3{color:var(--pri);margin-bottom:12px}
+.col ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:15px;color:var(--mute)}
+.soft{background:rgba(245,247,251,.94)}
+table{width:100%;border-collapse:collapse;margin-top:36px;font-size:16px}
+th{text-align:left;font-size:13px;font-weight:600;color:var(--mute);padding:12px 12px 12px 0;border-bottom:1px solid var(--line)}
+td{padding:20px 12px 20px 0;border-bottom:1px solid var(--line);vertical-align:middle}
+td.n,th.n{text-align:right;white-space:nowrap}
+td b{font-family:"Inter Tight",sans-serif;font-size:18px}
+.off{display:inline-block;margin-left:8px;font-size:12px;font-weight:600;color:var(--red);border:1px solid currentColor;border-radius:4px;padding:1px 6px;white-space:nowrap}
+.note{font-size:13px;color:var(--mute);margin-top:14px}
+.steps{display:grid;gap:22px;margin-top:36px}
+.steps div{border-top:2px solid var(--pri);padding-top:18px}
+.steps p{margin:0;color:var(--mute);font-size:15px}
+form.card{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:clamp(20px,3vw,32px);border:1px solid var(--line);border-radius:12px;background:#fff}
+label{display:grid;gap:6px;font-size:14px;font-weight:500}
+input,select,textarea{font:16px Inter,sans-serif;min-height:48px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);width:100%}
+textarea{padding:12px 14px;min-height:220px;resize:vertical;line-height:1.6}
+input:focus,select:focus,textarea:focus{border-color:var(--pri);outline:none;box-shadow:0 0 0 3px rgba(11,60,174,.15)}
+.chk{display:flex;align-items:center;gap:10px;font-weight:500}.chk input{width:20px;min-height:20px;height:20px;accent-color:var(--pri)}
+.hint{font-size:13px;color:var(--mute);font-weight:400}
+.full{grid-column:1/-1}
+.msg{grid-column:1/-1;font-size:15px;padding:14px 16px;border-radius:8px;background:var(--soft)}
+.msg a{color:var(--pri);font-weight:600}
+.ecg{height:90px;margin-top:-20px}.ecg svg{width:100%;height:100%;display:block}
+.ecg path{fill:none;stroke:var(--teal);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+/* posts */
+.phead{padding-top:150px;padding-bottom:28px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.chip{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#fff;font:500 14px Inter,sans-serif;color:var(--mute);cursor:pointer}
+.chip[aria-pressed=true]{border-color:var(--pri);color:var(--pri);background:#eef2fb}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.pc{display:flex;flex-direction:column;text-decoration:none;border-top:1px solid var(--line);padding-top:18px}
+.pc .im{aspect-ratio:16/10;border-radius:10px;overflow:hidden;background:var(--soft);display:grid;place-items:center;margin-bottom:16px;color:var(--pri)}
+.pc .im img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.pc:hover .im img{transform:scale(1.03)}
+.pc:hover h3{color:var(--pri)}
+.meta{font-size:13px;color:var(--mute);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{font-size:12px;font-weight:600;padding:2px 8px;border-radius:4px;background:#fdeceb;color:var(--red)}
+.badge.b{background:#eef2fb;color:var(--pri)}.badge.g{background:#e8f6f4;color:#0b7a6f}
+.pc p{margin:6px 0 0;color:var(--mute);font-size:15px}
+.price{font:700 20px/1.2 "Inter Tight",sans-serif;color:var(--ink);margin-top:10px;white-space:nowrap}
+.empty{padding:48px 0;color:var(--mute);border-top:1px solid var(--line)}
+.art{max-width:760px;margin:0 auto}
+.art .hero-im{border-radius:12px;overflow:hidden;margin:28px 0;aspect-ratio:16/9;background:var(--soft)}
+.art .hero-im img{width:100%;height:100%;object-fit:cover;display:block}
+.body{font-size:17px;line-height:1.75}
+.body h3{font-size:22px;margin:32px 0 8px}
+.body p{margin:0 0 18px}
+.body ul{margin:0 0 18px;padding-left:22px}
+.back{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--pri);font-weight:600;font-size:15px;min-height:44px}
+/* admin */
+.adm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:start}
+.alist{border-top:1px solid var(--line)}
+.ai{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
+.ai h3{font-size:16px;margin:0 0 2px}
+.ai .acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.ai.sel{background:linear-gradient(90deg,#eef2fb,transparent);margin:0 -12px;padding:16px 12px}
+.prev{display:flex;gap:12px;align-items:center}
+.prev img{width:120px;aspect-ratio:16/10;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.lock{max-width:560px;border:1px solid var(--line);border-radius:12px;padding:28px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:8px;font-size:15px;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+footer{border-top:1px solid var(--line);background:#fff}
+.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
+.foot p,.foot li{color:var(--mute);font-size:15px;margin:0}
+.foot ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.legal{max-width:1200px;margin:40px auto 0;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--mute);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.legal a{color:var(--mute)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:1080px){.links{display:none}.nav .btn{margin-left:auto}.menu{display:inline-flex!important}}
+.menu{display:none;margin-left:8px;width:46px;height:46px;border:1px solid var(--line);border-radius:8px;background:#fff;align-items:center;justify-content:center;cursor:pointer}
+.links.open{display:flex;flex-direction:column;width:100%;margin:0;order:9;padding:8px 0}
+@media(max-width:960px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}.col:nth-child(3){padding-left:0;border-left:0}.split{grid-template-columns:minmax(0,1fr);min-height:auto}.split.r>.copy{grid-column:auto}.space{display:none}.foot{grid-template-columns:minmax(0,1fr)}.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.adm{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.logo img{height:38px}.nav{gap:8px}.hero{align-items:flex-end}.hero .copy{padding-top:34vh}.facts b{font-size:24px}.cols{grid-template-columns:minmax(0,1fr)}.col,.col+.col{padding:20px 0 4px;border-left:0}form.card{grid-template-columns:minmax(0,1fr)}.hide-s{display:none}.pgrid{grid-template-columns:minmax(0,1fr)}.ai{grid-template-columns:minmax(0,1fr)}.ai .acts{justify-content:flex-start}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+nav .logo img{height:44px}
+#who a{text-decoration:none}
+</style>
+</head>
+<body>
+<nav class="s" aria-label="Admin"><div class="nav">
+  <a class="logo" href="/" aria-label="View website"><img src="/logo.png" alt="Madhavanidan Diagnostic"></a>
+  <span style="font-weight:600;color:var(--mute)">Admin</span>
+  <div class="links" style="display:flex" id="who" hidden><span style="align-self:center;font-size:14px;color:var(--mute);padding:0 8px" id="whoname"></span><a href="/" target="_blank" rel="noopener">View site</a></div>
+  <button class="btn ghost sm" type="button" id="logout" hidden style="margin-left:auto">Sign out</button>
+</div></nav>
+
+<!-- Login -->
+<section class="band" id="v-login" hidden style="min-height:100svh;display:grid;place-items:center">
+  <form class="lock" id="lf" novalidate style="width:min(440px,100%);display:grid;gap:16px;background:#fff">
+    <img src="/logo.png" alt="Madhavanidan Diagnostic" style="height:56px;width:auto;justify-self:start">
+    <div><h1 style="font-size:30px;margin:8px 0 4px">Admin sign in</h1><p class="lead" style="font-size:15px">Manage blog articles and new launches.</p></div>
+    <label>Username<input id="lu" autocomplete="username" required autocapitalize="none" spellcheck="false"></label>
+    <label>Password<input id="lp" type="password" autocomplete="current-password" required></label>
+    <button class="btn" type="submit" id="lbtn">Sign in</button>
+    <div class="msg" id="lmsg" hidden role="alert"></div>
+  </form>
+</section>
+
+<!-- Dashboard -->
+<section id="v-dash" hidden>
+  <div class="band phead" style="padding-top:130px"><div class="wrap">
+    <div class="kick">Site admin</div><h1>Manage content</h1>
+    <p class="lead">Write blog articles and announce new tests or features. Published posts appear on the website within a minute.</p>
+  </div></div>
+  <div class="band" style="padding-top:0"><div class="wrap">
+    <div class="adm">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+          <div class="chips" id="admtabs" style="margin:0"></div>
+          <button class="btn sm" id="newbtn" type="button">New post</button>
+        </div>
+        <div class="alist" id="alist"></div>
+      </div>
+      <form class="card" id="ed" novalidate>
+        <h3 class="full" id="edtitle" style="font-size:22px">New post</h3>
+        <label>Post type<select id="e-type"><option value="blog">Blog article</option><option value="launch">New launch / feature</option></select></label>
+        <label>Category<input id="e-cat" list="cats" placeholder="e.g. Preventive health" maxlength="60"><datalist id="cats"></datalist></label>
+        <label class="full">Title<input id="e-title" required maxlength="140"></label>
+        <label class="full">Short summary<span class="hint">Shown on cards, up to 220 characters.</span><input id="e-sum" maxlength="220"></label>
+        <label class="full" id="e-pricew" hidden>Price or offer<span class="hint">For launches, e.g. "₹499" or "Introductory ₹1,299".</span><input id="e-price" maxlength="60"></label>
+        <label class="full">Content<span class="hint">Leave a blank line between paragraphs. Start a line with ## for a heading or - for a bullet.</span><textarea id="e-body" maxlength="20000"></textarea></label>
+        <div class="full" style="display:grid;gap:8px"><span style="font-size:14px;font-weight:500">Cover image</span>
+          <div class="prev" style="flex-wrap:wrap"><img id="e-prev" alt="" hidden><input id="e-img" type="file" accept="image/jpeg,image/png,image/webp" style="padding:10px;flex:1 1 220px"><button class="btn danger sm" type="button" id="e-rm" hidden>Remove</button></div>
+          <span class="hint" id="e-imgnote">JPG, PNG or WebP. Large photos are resized automatically.</span></div>
+        <label>Publish date<input id="e-date" type="date"></label>
+        <label>Status<select id="e-status"><option value="published">Published</option><option value="draft">Draft (hidden from website)</option></select></label>
+        <label class="chk full"><input type="checkbox" id="e-feat">Feature on the home page</label>
+        <div class="full row" style="margin-top:4px"><button class="btn" type="submit" id="e-save">Save post</button><button class="btn ghost" type="button" id="e-cancel">Clear form</button></div>
+        <div class="msg" id="e-msg" hidden role="status"></div>
+      </form>
+    </div>
+  </div></div>
+</section>
+
+<script>
+{
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toast=t=>{const d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.textContent=t;document.body.append(d);setTimeout(()=>d.remove(),2600)};
+const today=()=>new Date().toLocaleDateString('en-CA');
+const imgUrl=u=>/^https:\/\/[^\s"'<>]+$/.test(u||'')||/^\/_img\/[\w./-]+$/.test(u||'')?u:'';
+const fmtDate=d=>{try{return new Date(d+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}catch(e){return ''}};
+
+async function api(path,opt={}){
+ const r=await fetch(path,{method:opt.method||'GET',credentials:'same-origin',headers:{'content-type':'application/json','x-admin':'1'},body:opt.body?JSON.stringify(opt.body):undefined});
+ let d={};try{d=await r.json()}catch(e){}
+ if(r.status===401&&path!=='/api/login'){showLogin('Your session has ended. Please sign in again.');throw new Error('signed_out')}
+ if(!r.ok)throw new Error(d.error||'Something went wrong. Please try again.');
+ return d}
+
+/* ---------- login ---------- */
+function showLogin(msg){$('v-dash').hidden=true;$('v-login').hidden=false;$('logout').hidden=true;$('who').hidden=true;
+ const m=$('lmsg');m.hidden=!msg;m.textContent=msg||'';$('lp').value='';setTimeout(()=>($('lu').value?$('lp'):$('lu')).focus(),50)}
+function showDash(user){$('v-login').hidden=true;$('v-dash').hidden=false;$('logout').hidden=false;$('who').hidden=false;$('whoname').textContent=user?'Signed in as '+user:'';load()}
+$('lf').addEventListener('submit',async e=>{e.preventDefault();const u=$('lu').value.trim(),p=$('lp').value,m=$('lmsg');
+ if(!u||!p){m.hidden=false;m.textContent='Enter your username and password.';return}
+ $('lbtn').disabled=true;$('lbtn').textContent='Signing in…';m.hidden=true;
+ try{await api('/api/login',{method:'POST',body:{username:u,password:p}});$('lp').value='';showDash(u)}
+ catch(err){m.hidden=false;m.textContent=err.message;$('lp').value='';$('lp').focus()}
+ $('lbtn').disabled=false;$('lbtn').textContent='Sign in'});
+$('logout').addEventListener('click',async()=>{try{await api('/api/logout',{method:'POST'})}catch(e){}posts=[];editing=null;showLogin('You have signed out.')});
+
+/* ---------- dashboard ---------- */
+let posts=[],admTab='all',editing=null,imgVal='',confirmId=null,saving=false;
+async function load(){$('alist').innerHTML='<div class="empty">Loading…</div>';
+ try{const d=await api('/api/admin/posts');posts=d.posts||[];render();if(!editing)fillForm(null)}
+ catch(e){if(e.message!=='signed_out')$('alist').innerHTML=`<div class="empty">${esc(e.message)}</div>`}}
+function render(){
+ const tabs=[['all','All'],['blog','Blog'],['launch','Launches'],['draft','Drafts']];
+ $('admtabs').innerHTML=tabs.map(t=>`<button class="chip" type="button" aria-pressed="${t[0]===admTab}" data-tab="${t[0]}">${t[1]}</button>`).join('');
+ const l=posts.filter(p=>admTab==='all'||(admTab==='draft'?p.status!=='published':p.type===admTab));
+ $('alist').innerHTML=l.length?l.map(p=>`<div class="ai${editing&&editing.id===p.id?' sel':''}"><div><div class="meta">${p.type==='launch'?'<span class="badge">Launch</span>':'<span class="badge b">Blog</span>'}${p.status!=='published'?'<span class="badge g">Draft</span>':''}${p.featured?'<span>Featured</span>':''}${p.date?`<span>${fmtDate(p.date)}</span>`:''}</div><h3 style="margin-top:6px">${esc(p.title||'Untitled')}</h3></div>
+  <div class="acts">${confirmId===p.id?`<span style="font-size:14px;align-self:center">Delete for good?</span><button class="btn danger sm" type="button" data-del="${esc(p.id)}">Delete</button><button class="btn ghost sm" type="button" data-nodel>Keep</button>`:`${p.status==='published'?`<a class="btn ghost sm" href="/post/${esc(p.id)}" target="_blank" rel="noopener">View</a>`:''}<button class="btn ghost sm" type="button" data-edit="${esc(p.id)}">Edit</button><button class="btn danger sm" type="button" data-ask="${esc(p.id)}">Delete</button>`}</div></div>`).join('')
+  :`<div class="empty">Nothing here yet. Use the form to create a post.</div>`;
+ $('cats').innerHTML=[...new Set(posts.map(p=>p.category).filter(Boolean))].map(c=>`<option value="${esc(c)}">`).join('')}
+function setImg(u){imgVal=imgUrl(u);$('e-prev').hidden=!imgVal;if(imgVal)$('e-prev').src=imgVal;$('e-rm').hidden=!imgVal;$('e-img').value=''}
+function togglePrice(){$('e-pricew').hidden=$('e-type').value!=='launch'}
+function fillForm(p){editing=p||null;confirmId=null;$('edtitle').textContent=p?'Edit post':'New post';$('e-msg').hidden=true;
+ $('e-type').value=p?.type||'blog';$('e-cat').value=p?.category||'';$('e-title').value=p?.title||'';$('e-sum').value=p?.summary||'';
+ $('e-price').value=p?.price||'';$('e-body').value=p?.body||'';$('e-date').value=p?.date||today();
+ $('e-status').value=p?.status||'published';$('e-feat').checked=!!p?.featured;setImg(p?.image);$('e-imgnote').textContent='JPG, PNG or WebP. Large photos are resized automatically.';togglePrice();render()}
+$('e-type').addEventListener('change',togglePrice);
+$('newbtn').addEventListener('click',()=>{fillForm(null);$('e-title').focus()});
+$('e-cancel').addEventListener('click',()=>fillForm(null));
+$('e-rm').addEventListener('click',()=>setImg(''));
+$('admtabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b){admTab=b.dataset.tab;render()}});
+$('alist').addEventListener('click',async e=>{
+ const ed=e.target.closest('[data-edit]');if(ed){const p=posts.find(x=>x.id===ed.dataset.edit);if(p){fillForm(p);if(innerWidth<960)$('ed').scrollIntoView({behavior:'smooth'})}}
+ const ask=e.target.closest('[data-ask]');if(ask){confirmId=ask.dataset.ask;render()}
+ if(e.target.closest('[data-nodel]')){confirmId=null;render()}
+ const del=e.target.closest('[data-del]');if(del){const id=del.dataset.del;confirmId=null;
+  try{await api('/api/admin/posts?id='+encodeURIComponent(id),{method:'DELETE'});posts=posts.filter(p=>p.id!==id);if(editing&&editing.id===id)fillForm(null);else render();toast('Post deleted')}
+  catch(err){if(err.message!=='signed_out')toast(err.message)}}});
+
+// Resize in the browser before upload (max 1600px, JPEG) to keep pages fast.
+function resize(file){return new Promise((ok,no)=>{const img=new Image(),url=URL.createObjectURL(file);
+ img.onload=()=>{const s=Math.min(1,1600/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);
+  const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);ok(c.toDataURL('image/jpeg',.85))};
+ img.onerror=()=>{URL.revokeObjectURL(url);no(new Error('This file could not be read as an image.'))};img.src=url})}
+$('e-img').addEventListener('change',async()=>{const f=$('e-img').files[0];if(!f)return;const note=$('e-imgnote');
+ if(f.size>25*1024*1024){note.textContent='That file is over 25 MB. Please choose a smaller image.';$('e-img').value='';return}
+ note.textContent='Uploading…';$('e-save').disabled=true;
+ try{const dataUrl=await resize(f);const d=await api('/api/admin/upload',{method:'POST',body:{dataUrl}});setImg(d.url);note.textContent='Image uploaded.'}
+ catch(err){if(err.message!=='signed_out')note.textContent=err.message;$('e-img').value=''}
+ $('e-save').disabled=false});
+$('ed').addEventListener('submit',async e=>{e.preventDefault();if(saving)return;const msg=$('e-msg');msg.hidden=false;
+ const post={id:editing?.id,type:$('e-type').value,category:$('e-cat').value,title:$('e-title').value,summary:$('e-sum').value,
+  price:$('e-price').value,body:$('e-body').value,image:imgVal,date:$('e-date').value||today(),status:$('e-status').value,featured:$('e-feat').checked};
+ if(!post.title.trim()||!post.body.trim()){msg.textContent='Please add a title and some content.';return}
+ saving=true;$('e-save').disabled=true;msg.textContent='Saving…';
+ try{const d=await api('/api/admin/posts',{method:'POST',body:{post}});const p=d.post;
+  posts=[p,...posts.filter(x=>x.id!==p.id)].sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.updated||0)-(a.updated||0));
+  editing=p;$('edtitle').textContent='Edit post';
+  msg.innerHTML=p.status==='published'?`Published. <a href="/post/${esc(p.id)}" target="_blank" rel="noopener">View on website</a>`:'Saved as draft. It is hidden from the website.';
+  toast(p.status==='published'?'Post published':'Draft saved');render()}
+ catch(err){msg.textContent=err.message==='signed_out'?'Your session ended — your text is still in the form. Sign in again, then save.':err.message}
+ saving=false;$('e-save').disabled=false});
+
+/* ---------- start ---------- */
+fetch('/api/session',{credentials:'same-origin'}).then(r=>r.json()).then(d=>{
+ if(d.configError)showLogin('The admin login is not set up yet. Add the environment variables described in the README.');
+ else d.signedIn?showDash(d.user):showLogin()}).catch(()=>showLogin('Cannot reach the server. Please try again.'));
+}
+
+</script>
+</body>
+</html>
